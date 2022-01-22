@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Business.Interop.Dto.BookDto>
+
+<table style="width:100%">
+    <tr>
+        <th style="text-align:left; font-size:large"><a class="btn-outline-dark" asp-controller="Home" asp-action="Index">Назад</a></th>
+        <th style="text-align:right; font-size:large"><a class="btn-outline-dark" asp-action="Add">Добавить</a></th>
+    </tr>
+</table>
+
+<hr>
+
+<table>
+    <colgroup>
+        <col style="width:50%">
+        <col style="width:30%">
+        <col style="width:20%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Количество страниц</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="background-color:#effdff; border-radius:3px;">
+                <td class="col-3">@item.Name</td>
+                <td class="col-6">@item.Pages</td>
+                <td style="text-align:right"><a class="btn-outline-dark" asp-action="Add" asp-route-id="@item.Id">Редактировать</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

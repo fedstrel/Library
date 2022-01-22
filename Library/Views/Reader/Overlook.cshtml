@@ -1,0 +1,31 @@
+﻿@model Library.Models.ReaderOverlookModel;
+
+<table style="width:100%">
+    <tr>
+        <th style="text-align:left; font-size:large"><a class="btn-outline-dark" asp-controller="Reader" asp-action="Index">Назад</a></th>
+        <th style="text-align:right; font-size:large"><a class="btn-outline-dark" asp-action="Add" asp-route-id="@Model.Reader.Id">Редактировать</a></th>
+    </tr>
+</table>
+
+<table style="width:100%">
+    <tr>
+        <td style="font-size:large">Имя</td>
+        <td style="text-align:right">@Model.Reader.Firstname</td>
+    </tr>
+    <tr>
+        <td style="font-size:large">Фамилия</td>
+        <td style="text-align:right">@Model.Reader.Lastname</td>
+    </tr>
+</table>
+
+<table style="width:100%">
+    <tr>
+        <td  style="font-size:large; text-align:center">Книги</td>
+    </tr>
+    @foreach (string name in Model.BookNames)
+    {
+        <tr>
+            <td>@name</td>
+        </tr>
+    }
+</table>

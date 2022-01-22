@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Business.Interop.Dto.EmployeeDto>
+
+<table style="width:100%">
+    <tr>
+        <th style="text-align:left; font-size:large"><a class="btn-outline-dark" asp-controller="Home" asp-action="Index">Назад</a></th>
+        <th style="text-align:right; font-size:large"><a class="btn-outline-dark" asp-action="Add">Добавить</a></th>
+    </tr>
+</table>
+
+<hr>
+
+<table>
+    <colgroup>
+        <col style="text-align:left; width:30%">
+        <col style="text-align: left; width: 30%">
+        <col style="text-align: left; width: 20%">
+        <col style="text-align: left; width: 20%">
+    </colgroup>
+    <thead style="display:table-header-group">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Зарплата</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="background-color:#effdff; border-radius:3px;">
+            <td class="col-3">@item.Firstname</td>
+            <td class="col-6">@item.Lastname</td>
+            <td class="col-6">@item.Salary</td>
+            <td style="text-align:right"><a class="btn-outline-dark" asp-action="Add" asp-route-id="@item.Id">Редактировать</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

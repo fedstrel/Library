@@ -1,0 +1,53 @@
+﻿@model Business.Interop.Dto.ReaderDto;
+
+<div class="btn-group">
+    <a class="btn-outline-dark" asp-action="Index">Назад</a>
+</div>
+<hr />
+
+<h2>@(Model.Id == 0 ? "Добавление читателя" : "Просмотр информации о читателе")</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" placeholder="@Model.Id">
+
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label">Имя</label>
+                <input asp-for="Firstname" class="form-control" maxlength="100" placeholder="Иван" pattern="[А-ЯЁ0-9][а-яё]*" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label">Фамилия</label>
+                <input asp-for="Lastname" class="form-control" maxlength="100" placeholder="Иванов" pattern="[А-ЯЁ0-9][а-яё]*" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BookIds" class="control-label">Доступные книги</label>
+                <select asp-antiforgery="true"
+                        data-live-search="true"
+                        autocomplete="true"
+                        asp-for="BookIds"
+                        class="form-control"
+                        asp-items="(MultiSelectList)@ViewData["AvailableBookIds"]">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="BookIds" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@(Model.Id == 0 ? "Добавить" : "Обновить")" class="btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+    @if (Model.Id != 0)
+    {
+        <form asp-action="Delete" asp-route-id="@Model.Id">
+            <input type="submit" value="Удалить" class="btn-outline-danger" />
+        </form>
+    }
+</div>

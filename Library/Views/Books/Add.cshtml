@@ -1,0 +1,80 @@
+﻿@model Business.Interop.Dto.BookDto;
+
+<div class="btn-group">
+    <a class="btn-outline-dark" asp-action="Index">Назад</a>
+</div>
+<hr/>
+
+<h2>@(Model.Id == 0 ? "Создание книги" : "Просмотр книги")</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Add">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Id" type="hidden" placeholder="@Model.Id">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название книги</label>
+                <input asp-for="Name" class="form-control" maxlength="100" placeholder="@Model.Name" pattern="[А-ЯЁ0-9][А-ЯЁа-яё0-9\s]*"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pages" class="control-label">Количество страниц</label>
+                <input asp-for="Pages" class="form-control" type="number" placeholder="@Model.Pages"/>
+                <span asp-validation-for="Pages" class="text-danger"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="LibraryId" class="control-label">Библиотека</label>
+                <select asp-antiforgery="true" 
+                        data-live-search="true" 
+                        autocomplete="true" 
+                        asp-for="LibraryId" 
+                        class="form-control" 
+                        asp-items="(SelectList)@ViewData["LibraryIds"]">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="LibraryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GenreIds" class="control-label">Жанры</label>
+                <select multiple="multiple"
+                        required
+                        asp-antiforgery="true"
+                        data-live-search="true"
+                        autocomplete="true"
+                        asp-for="GenreIds"
+                        class="form-control"
+                        asp-items="(MultiSelectList)@ViewData["Genres"]">
+                    <option value="" />
+                </select>
+                <span asp-validation-for="GenreIds" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AuthorIds" class="control-label">Авторы</label>
+                <select multiple="multiple"
+                        required
+                        asp-antiforgery="true"
+                        data-live-search="true"
+                        autocomplete="true"
+                        asp-for="AuthorIds"
+                        class="form-control"
+                        asp-items="(MultiSelectList)@ViewData["Authors"]">
+                    <option value="" />
+                </select>
+                <span asp-validation-for="AuthorIds" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@(Model.Id == 0 ? "Создать" : "Обновить")" class="btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+    @if (Model.Id != 0)
+    {
+        <form asp-action="Delete" asp-route-id="@Model.Id">
+            <input type="submit" value="Удалить" class="btn-outline-danger" />
+        </form>
+    }
+</div>
