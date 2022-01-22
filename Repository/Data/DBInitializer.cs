@@ -5,9 +5,9 @@ using Business.Entities;
 
 namespace Repository.Data
 {
-    class DBInitializer
+    public class DBInitializer
     {
-        public void Initialize(Context context)
+        public static void Initialize(Context context)
         {
             Author[] authors = new Author[]
                 {
